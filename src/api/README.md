@@ -1,9 +1,10 @@
 # host
+
 http://localhost:5008
 
 # 登录
 
-path: /admin/login
+path: /api/admin/login
 method: post
 
 请求参数
@@ -11,12 +12,12 @@ username: string;
 password: string;
 
 响应数据
-success: {id:number; username: string; passwrod};
+success: {code: number; data:object};
 error: 'login fail'
 
 # 修改密码
 
-path: /admin
+path: /api/admin
 method: put
 
 请求参数
@@ -25,4 +26,16 @@ oldPassword: string;
 newPassword: string;
 
 响应数据
-{rows: number}
+{code: number; data :boolean}
+
+# whoami
+
+path: /api/admin/whoami
+method: post
+
+请求参数
+authorization: string
+
+响应数据
+success: {code: number; data: object}
+failed: string;
