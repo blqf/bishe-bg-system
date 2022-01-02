@@ -1,3 +1,6 @@
+# host
+http://localhost:5008
+
 # 登录
 
 path: /admin/login
