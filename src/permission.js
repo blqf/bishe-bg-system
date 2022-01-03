@@ -2,7 +2,7 @@ import router from "./router";
 import store from "./store";
 import NProgress from "nprogress"; // progress bar
 import "nprogress/nprogress.css"; // progress bar style
-import { getToken } from "@/utils/auth"; // get token from cookie
+import { getToken, removeToken } from "@/utils/auth"; // get token from cookie
 import getPageTitle from "@/utils/get-page-title";
 
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
@@ -27,9 +27,11 @@ router.beforeEach(async (to, from, next) => {
     } else {
       if (hasToken) {
         console.log("走whoami接口");
-        const data = store.dispatch("user/whoami");
+        const data = await store.dispatch("user/whoami");
+        console.log(data, "data");
         if (typeof data === "string") {
           console.log("whoami没过，进入登录页");
+          removeToken();
           next(`/login?redirect=${to.path}`);
         } else {
           console.log("whoami过了，过");

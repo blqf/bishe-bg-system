@@ -40,6 +40,8 @@ const actions = {
         .then((res) => {
           if (typeof res.data !== "string") {
             commit("SET_USER", res.data);
+            commit("SET_AVATAR", res.data.avatar);
+            commit("SET_NAME", res.data.username);
             resolve(res.data);
           } else {
             console.log("object");
@@ -58,16 +60,14 @@ const actions = {
       whoami(state.token)
         .then((response) => {
           const data = response.data;
-
           if (typeof data === "string") {
-            return reject("Verification failed, please Login again.");
+            resolve(data);
+          } else {
+            commit("SET_AVATAR", data.avatar);
+            commit("SET_NAME", data.username);
+            commit("SET_USER", data);
+            resolve(data);
           }
-
-          commit("SET_AVATAR", data.avatar);
-          commit("SET_NAME", data.username);
-
-          commit("SET_USER", data);
-          resolve(data);
         })
         .catch((error) => {
           reject(error);
@@ -78,16 +78,10 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token)
-        .then(() => {
-          removeToken(); // must remove  token  first
-          resetRouter();
-          commit("RESET_STATE");
-          resolve();
-        })
-        .catch((error) => {
-          reject(error);
-        });
+      removeToken(); // must remove  token  first
+      resetRouter();
+      commit("RESET_STATE");
+      resolve();
     });
   },
 
