@@ -65,6 +65,7 @@
 
 <script>
 import { validUsername } from "@/utils/validate";
+import { Message } from "element-ui";
 
 export default {
   name: "Login",
@@ -128,9 +129,11 @@ export default {
             .dispatch("user/login", this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || "/" });
+              Message.success("登录成功");
               this.loading = false;
             })
             .catch(() => {
+              Message.error("账号或密码错误");
               this.loading = false;
             });
         } else {

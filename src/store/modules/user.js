@@ -44,7 +44,6 @@ const actions = {
             commit("SET_NAME", res.data.username);
             resolve(res.data);
           } else {
-            console.log("object");
             reject(res.data);
           }
         })
