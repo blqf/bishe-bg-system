@@ -160,6 +160,19 @@ export const constantRoutes = [
     ],
   },
 
+  {
+    path: "/personal-center",
+    component: Layout,
+    redirect: "/personal-center",
+    children: [
+      {
+        path: "personal-center",
+        name: "PersonalCenter",
+        component: () => import("@/views/personal-center"),
+      },
+    ],
+  },
+
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },
 ];

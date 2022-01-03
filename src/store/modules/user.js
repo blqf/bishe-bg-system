@@ -5,8 +5,9 @@ import { resetRouter } from "@/router";
 const getDefaultState = () => {
   return {
     token: getToken(),
-    name: "",
-    avatar: "",
+    name: "Admin",
+    avatar:
+      "https://www.huiyadan.com/images/banner/20.jpg",
     user: null,
   };
 };
@@ -62,6 +63,7 @@ const actions = {
           if (typeof data === "string") {
             resolve(data);
           } else {
+            console.log(data, "data");
             commit("SET_AVATAR", data.avatar);
             commit("SET_NAME", data.username);
             commit("SET_USER", data);
