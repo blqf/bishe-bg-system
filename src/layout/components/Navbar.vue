@@ -16,7 +16,7 @@
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
-            <el-dropdown-item> 首页 </el-dropdown-item>
+            <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
 
           <router-link to="/personal-center/personal-center">

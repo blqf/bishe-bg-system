@@ -1,13 +1,11 @@
-import { login, logout, whoami } from "@/api/user";
-import { getToken, setToken, removeToken } from "@/utils/auth";
-import { resetRouter } from "@/router";
+import { login, whoami } from "@/api/user";
+import { getToken, removeToken } from "@/utils/auth";
 
 const getDefaultState = () => {
   return {
     token: getToken(),
     name: "Admin",
-    avatar:
-      "https://www.huiyadan.com/images/banner/20.jpg",
+    avatar: "https://www.huiyadan.com/images/banner/20.jpg",
     user: null,
   };
 };
@@ -63,7 +61,6 @@ const actions = {
           if (typeof data === "string") {
             resolve(data);
           } else {
-            console.log(data, "data");
             commit("SET_AVATAR", data.avatar);
             commit("SET_NAME", data.username);
             commit("SET_USER", data);
@@ -80,7 +77,6 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       removeToken(); // must remove  token  first
-      resetRouter();
       commit("RESET_STATE");
       resolve();
     });

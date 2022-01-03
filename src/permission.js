@@ -19,6 +19,7 @@ router.beforeEach(async (to, from, next) => {
   const hasUserInfo = store.getters.user;
 
   if (to.meta.auth) {
+    console.log("需要登录");
     // 需要登录
     if (hasUserInfo) {
       console.log("本地有信息，直接过");
@@ -28,7 +29,6 @@ router.beforeEach(async (to, from, next) => {
       if (hasToken) {
         console.log("走whoami接口");
         const data = await store.dispatch("user/whoami");
-        console.log(data, "data");
         if (typeof data === "string") {
           console.log("whoami没过，进入登录页");
           removeToken();
@@ -45,7 +45,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     // 不需要登录
-    console.log("不需要登录，直接过");
+    console.log('不需要登录，直接过')
     if (to.path === "/login" && hasUserInfo) {
       next("/");
     } else {
