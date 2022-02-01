@@ -35,6 +35,7 @@ router.beforeEach(async (to, from, next) => {
           next(`/login?redirect=${to.path}`);
         } else {
           console.log("whoami过了，过");
+          store.commit("user/SET_TOKEN", getToken());
           next();
           NProgress.done();
         }
@@ -45,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     // 不需要登录
-    console.log('不需要登录，直接过')
+    console.log("不需要登录，直接过");
     if (to.path === "/login" && hasUserInfo) {
       next("/");
     } else {

@@ -87,6 +87,13 @@ export const constantRoutes = [
         component: () => import("@/views/goods/goods-size"),
         meta: { title: "尺码管理", icon: "el-icon-star-on", auth: true },
       },
+      {
+        path: "goods-edit/:id",
+        name: "GoodsEdit",
+        hidden: true,
+        component: () => import("@/views/goods/goods-edit"),
+        meta: { title: "编辑服装", icon: "el-icon-star-on", auth: true },
+      },
     ],
   },
 
