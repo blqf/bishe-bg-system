@@ -7,6 +7,13 @@ export function findAllColors() {
   });
 }
 
+export function findColorById(id) {
+  return request({
+    url: `/api/colors/${id}`,
+    method: "get",
+  });
+}
+
 export function addNewColor(newColorInfo) {
   return request({
     url: "/api/colors",
@@ -15,7 +22,7 @@ export function addNewColor(newColorInfo) {
   });
 }
 
-export function updateSize(id, newColorInfo) {
+export function updateColor(id, newColorInfo) {
   return request({
     url: `/api/colors/${id}`,
     method: "put",
@@ -23,7 +30,7 @@ export function updateSize(id, newColorInfo) {
   });
 }
 
-export function deleteSizeById(id, newColorInfo) {
+export function deleteColorById(id, newColorInfo) {
   return request({
     url: `/api/colors/${id}`,
     method: "delete",

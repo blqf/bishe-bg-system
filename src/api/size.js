@@ -7,6 +7,13 @@ export function findAllSize() {
   });
 }
 
+export function findSizeById(id) {
+  return request({
+    url: `/api/size/${id}`,
+    method: "get",
+  });
+}
+
 export function addNewSize(newSizeInfo) {
   return request({
     url: "/api/size",

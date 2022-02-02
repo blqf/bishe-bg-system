@@ -9,6 +9,8 @@
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :headers="headers"
+      name="img"
+      accept="image/png,image/jpeg"
     >
       <img v-if="value" :src="imageUrl" class="avatar" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -17,19 +19,24 @@
 </template>
 
 <script>
-// import { server_URL } from "@/urlConfig.js";
+import { getToken } from "@/utils/auth";
+import { server_URL } from "@/url-config";
 export default {
   props: ["uploadTitle", "value"],
   computed: {
     imageUrl() {
       if (this.value) {
-        // return server_URL + this.value;
-        return this.value;
+        if (this.value.includes("http://") || this.value.includes("https://")) {
+          return this.value;
+        } else {
+          console.log(server_URL + this.value);
+          return server_URL + this.value;
+        }
       }
     },
     headers() {
       return {
-        Authorization: "Bearer " + localStorage.getItem("adminToken"), // 从本地获取 token，添加到 header 里面
+        authorization: getToken(), // 从本地获取 token，添加到 header 里面
       };
     },
   },

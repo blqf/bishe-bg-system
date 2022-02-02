@@ -1,7 +1,12 @@
 <template>
   <div class="app-container">
     <!-- 数据表格 -->
-    <el-table :data="data" style="width: 100%" border v-loading="isFetchingData">
+    <el-table
+      :data="data"
+      style="width: 100%"
+      border
+      v-loading="isFetchingData"
+    >
       <el-table-column prop="date" label="序号" width="60" align="center">
         <template slot-scope="scope">{{
           scope.$index + (currentPage - 1) * pageSize + 1
@@ -22,13 +27,7 @@
               fit="contain"
               :preview-src-list="srcList"
             ></el-image>
-            <a
-              href="#"
-              target="_blank"
-              @click.prevent="goToTitleHandle(scope.row)"
-              slot="reference"
-              >{{ scope.row.goods_name }}</a
-            >
+            <span slot="reference">{{ scope.row.goods_name }}</span>
           </el-popover>
         </template>
       </el-table-column>
@@ -112,6 +111,7 @@
 
 <script>
 import { deleteGoodsById, findGoodsList } from "@/api/goods";
+import { server_URL } from "@/url-config";
 
 export default {
   data() {
@@ -123,7 +123,7 @@ export default {
       totalPage: 0, // 总页数
       count: 0, // 数据总条数
       pagerCurrentPage: 1, // 分页栏当前页码
-      isFetchingData: false
+      isFetchingData: false,
     };
   },
 
@@ -133,7 +133,14 @@ export default {
       findGoodsList(this.pageSize, this.currentPage).then((data) => {
         this.data = data.rows;
         for (var i of data.rows) {
-          this.srcList.push(i.goods_img_url);
+          if (
+            i.goods_img_url.includes("http://") ||
+            i.goods_img_url.includes("https://")
+          ) {
+            this.srcList.push(i.goods_img_url);
+          } else {
+            this.srcList.push(server_URL + i.goods_img_url);
+          }
         }
         this.count = data.count;
         this.totalPage = Math.ceil(data.count / this.pageSize);
@@ -143,7 +150,7 @@ export default {
           this.currentPage = this.totalPage;
           this.fetchData();
         }
-        this.isFetchingData = false
+        this.isFetchingData = false;
       });
     },
     // 跳转到具体的商品
