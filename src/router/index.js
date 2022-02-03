@@ -98,27 +98,6 @@ export const constantRoutes = [
   },
 
   {
-    path: "/customer",
-    component: Layout,
-    redirect: "/customer/customer-list",
-    meta: { title: "顾客管理", icon: "el-icon-user", auth: true },
-    children: [
-      {
-        path: "goods-list",
-        name: "CustomerList",
-        component: () => import("@/views/customer/customer-list"),
-        meta: { title: "顾客列表", icon: "nested", auth: true },
-      },
-      {
-        path: "goods-add",
-        name: "CustomerAdd",
-        component: () => import("@/views/customer/customer-add"),
-        meta: { title: "添加顾客", icon: "el-icon-circle-plus", auth: true },
-      },
-    ],
-  },
-
-  {
     path: "/sales-record",
     component: Layout,
     redirect: "/sales-record/sales-record-list",
@@ -135,6 +114,20 @@ export const constantRoutes = [
         name: "SalesRecordAdd",
         component: () => import("@/views/sales-record/sales-record-add"),
         meta: { title: "添加订单", icon: "el-icon-circle-plus", auth: true },
+      },
+    ],
+  },
+
+  {
+    path: "/customer",
+    component: Layout,
+    redirect: "/customer",
+    children: [
+      {
+        path: "goods-list",
+        name: "CustomerList",
+        component: () => import("@/views/customer"),
+        meta: { title: "顾客列表", icon: "nested", auth: true },
       },
     ],
   },
