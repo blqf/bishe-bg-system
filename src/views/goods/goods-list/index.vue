@@ -1,4 +1,5 @@
 <template>
+  <!-- 当前图片预览与循环预览有进行src判断 -->
   <div class="app-container">
     <!-- 数据表格 -->
     <el-table
@@ -23,7 +24,12 @@
           >
             <el-image
               style="width: 200px"
-              :src="scope.row.goods_img_url"
+              :src="
+                scope.row.goods_img_url.includes('http://') ||
+                scope.row.goods_img_url.includes('https://')
+                  ? scope.row.goods_img_url
+                  : server_URL + scope.row.goods_img_url
+              "
               fit="contain"
               :preview-src-list="srcList"
             ></el-image>
@@ -124,6 +130,7 @@ export default {
       count: 0, // 数据总条数
       pagerCurrentPage: 1, // 分页栏当前页码
       isFetchingData: false,
+      server_URL: server_URL,
     };
   },
 

@@ -129,7 +129,8 @@ export default {
         obj.goods_price &&
         obj.goods_stock &&
         obj.colorId &&
-        obj.sizeId
+        obj.sizeId &&
+        obj.goods_img_url
       ) {
         if (this.mode === "add") {
           // 说明是要新增
@@ -144,7 +145,7 @@ export default {
           });
         }
       } else {
-        this.$message.error("请完善必填内容");
+        this.$message.info("请完善必填内容");
       }
     },
     change() {
