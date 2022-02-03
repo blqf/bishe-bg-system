@@ -38,7 +38,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="title" label="商品描述" width="250" align="center">
+      <el-table-column prop="title" label="服装描述" width="250" align="center">
         <template slot-scope="scope">{{
           scope.row.goods_description
         }}</template>
@@ -49,7 +49,9 @@
       </el-table-column>
 
       <el-table-column prop="title" label="价格" align="center">
-        <template slot-scope="scope">{{ scope.row.goods_price }}</template>
+        <template slot-scope="scope">{{
+          scope.row.goods_price + "元"
+        }}</template>
       </el-table-column>
 
       <el-table-column prop="title" label="颜色" align="center">
@@ -160,15 +162,14 @@ export default {
         this.isFetchingData = false;
       });
     },
-    // 跳转到具体的商品
+    // 跳转到具体的服装
     // goToTitleHandle(goodsDetail) {
     //   window.open(`/article/${goodsDetail.id}`);
     // },
-    // 删除商品
+    // 删除服装
     deleteGoods(blogInfo) {
       this.$confirm(
-        "删除该商品会将该商品下面的评论一并删除，是否继续?",
-        "是否删除此商品",
+        "删除该服装会将该服装下的评论、销售记录、当前订单一并删除，是否继续?",
         {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
@@ -185,7 +186,7 @@ export default {
       });
     },
 
-    // 编辑商品
+    // 编辑服装
     editBlogHandle(blogInfo) {
       this.$router.push(`/goods/goods-edit/${blogInfo.id}`);
     },

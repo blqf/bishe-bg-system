@@ -20,7 +20,7 @@
           </router-link>
 
           <router-link to="/personal-center/personal-center">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item>修改密码</el-dropdown-item>
           </router-link>
 
           <a target="_blank" href="https://github.com/milk054/">

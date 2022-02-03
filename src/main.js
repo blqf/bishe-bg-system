@@ -1,4 +1,5 @@
 import Vue from "vue";
+import dayjs from 'dayjs';
 
 import "normalize.css/normalize.css"; // A modern alternative to CSS resets
 
@@ -14,8 +15,6 @@ import router from "./router";
 
 import "@/icons"; // icon
 import "@/permission"; // permission control
-
-import { addNewGoods } from "./api/goods";
 
 /**
  * If you don't want to use mock-server
@@ -36,6 +35,8 @@ Vue.use(ElementUI, { locale });
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false;
+
+Vue.prototype.dayjs = dayjs;
 
 new Vue({
   el: "#app",

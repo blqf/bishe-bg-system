@@ -13,7 +13,7 @@
         }}</template>
       </el-table-column>
 
-      <el-table-column prop="title" label="顾客姓名" width="150" align="center">
+      <el-table-column prop="title" label="顾客姓名"  align="center">
         <template slot-scope="scope">
           {{ scope.row.user_name }}
         </template>
@@ -26,7 +26,9 @@
       </el-table-column>
 
       <el-table-column prop="title" label="年龄" width="150" align="center">
-        <template slot-scope="scope">{{ scope.row.user_birthday }}</template>
+        <template slot-scope="scope">{{
+          dayjs().diff(dayjs(scope.row.user_birthday), 'y') + '岁'
+        }}</template>
       </el-table-column>
 
       <el-table-column prop="title" label="购买次数" width="150" align="center">
