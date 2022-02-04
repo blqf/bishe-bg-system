@@ -152,7 +152,6 @@ export default {
       this.$forceUpdate();
     },
     handleUploadImage(data) {
-      console.log("修改路径");
       this.form.imgUrl = data.url;
     },
   },

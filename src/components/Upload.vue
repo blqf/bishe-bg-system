@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="containerStyle">
     <!-- 上传组件标题 -->
     <div class="block">{{ uploadTitle }}</div>
     <!-- 上传控件 -->
@@ -22,10 +22,11 @@
 import { getToken } from "@/utils/auth";
 import { server_URL } from "@/url-config";
 export default {
-  props: ["uploadTitle", "value"],
+  props: ["uploadTitle", "value", 'containerStyle'],
   computed: {
     imageUrl() {
       if (this.value) {
+        console.log(this.value);
         if (this.value.includes("http://") || this.value.includes("https://")) {
           return this.value;
         } else {
