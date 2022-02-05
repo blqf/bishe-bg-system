@@ -13,28 +13,39 @@
         }}</template>
       </el-table-column>
 
-      <el-table-column prop="title" label="评论内容" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.comment_content }}
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="title" label="评论时间" width="250" align="center">
-        <template slot-scope="scope">{{
-          dayjs(scope.row.comment_date_time).format('YYYY-MM-DD HH:mm:ss')
-        }}</template>
-      </el-table-column>
-
-      <el-table-column prop="title" label="评论星级" width="150" align="center">
-        <template slot-scope="scope">{{ scope.row.comment_level + '颗星' }}</template>
+      <el-table-column prop="title" label="对应顾客" width="150" align="center">
+        <template slot-scope="scope">{{ scope.row.user_name }}</template>
       </el-table-column>
 
       <el-table-column prop="title" label="对应商品" width="150" align="center">
         <template slot-scope="scope">{{ scope.row.goods_name }}</template>
       </el-table-column>
 
-      <el-table-column prop="title" label="对应顾客" width="150" align="center">
-        <template slot-scope="scope">{{ scope.row.user_name }}</template>
+      <el-table-column prop="title" label="评论内容" align="center">
+        <template slot-scope="scope">
+          <el-popover
+            placement="top-start"
+            width="300"
+            trigger="hover"
+            :content="scope.row.comment_content"
+          >
+            <span slot="reference" class="comment_content">{{
+              scope.row.comment_content
+            }}</span>
+          </el-popover>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="title" label="评论时间" width="250" align="center">
+        <template slot-scope="scope">{{
+          dayjs(scope.row.comment_date_time).format("YYYY-MM-DD HH:mm:ss")
+        }}</template>
+      </el-table-column>
+
+      <el-table-column prop="title" label="评论星级" width="150" align="center">
+        <template slot-scope="scope">{{
+          scope.row.comment_level + "颗星"
+        }}</template>
       </el-table-column>
 
       <el-table-column label="操作" width="130" align="center">
@@ -152,4 +163,13 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app-container {
+  .comment_content {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+</style>

@@ -113,7 +113,7 @@ export const constantRoutes = [
         path: "sales-record-add",
         name: "SalesRecordAdd",
         component: () => import("@/views/sales-record/sales-record-add"),
-        meta: { title: "添加订单", icon: "el-icon-circle-plus", auth: true },
+        meta: { title: "模拟下单", icon: "el-icon-circle-plus", auth: true },
       },
     ],
   },
