@@ -1,20 +1,16 @@
 import Vue from "vue";
-import dayjs from 'dayjs';
-
-import "normalize.css/normalize.css"; // A modern alternative to CSS resets
-
+import dayjs from "dayjs";
+import * as echarts from "echarts";
 import ElementUI from "element-ui";
-import "element-ui/lib/theme-chalk/index.css";
-import locale from "element-ui/lib/locale/lang/en"; // lang i18n
-
-import "@/styles/index.scss"; // global css
-
 import App from "./App";
 import store from "./store";
 import router from "./router";
-
 import "@/icons"; // icon
 import "@/permission"; // permission control
+import locale from "element-ui/lib/locale/lang/en"; // lang i18n
+import "normalize.css/normalize.css"; // A modern alternative to CSS resets
+import "@/styles/index.scss"; // global css
+import "element-ui/lib/theme-chalk/index.css";
 
 /**
  * If you don't want to use mock-server
@@ -37,6 +33,7 @@ Vue.use(ElementUI, { locale });
 Vue.config.productionTip = false;
 
 Vue.prototype.dayjs = dayjs;
+Vue.prototype.$echarts = echarts;
 
 new Vue({
   el: "#app",

@@ -148,7 +148,7 @@ export default {
           .subtract(+obj.user_birthday, "year")
           .valueOf();
         addCurrentOrder(obj).then(() => {
-          this.$router.push("/sales-record"); // 跳转到订单列表
+          this.$router.push("/current-orders"); // 跳转到订单列表
         });
       } else {
         this.$message.info("请完善必填内容");
@@ -164,6 +164,7 @@ export default {
   created() {
     // 一进来的时候，就需要拿取的数据
     findCustomerList().then((resp) => {
+      console.log(resp.rows);
       this.customers = resp.rows;
     });
     findGoodsList().then((resp) => {

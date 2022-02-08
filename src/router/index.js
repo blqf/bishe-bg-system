@@ -98,23 +98,23 @@ export const constantRoutes = [
   },
 
   {
-    path: "/sales-record",
+    path: "/current-orders",
     component: Layout,
-    redirect: "/sales-record/sales-record-list",
+    redirect: "/current-orders/current-orders-list",
     meta: { title: "订单管理", icon: "el-icon-tickets", auth: true },
     children: [
       {
-        path: "sales-record-list",
+        path: "current-orders-list",
         name: "SalesRecord",
-        component: () => import("@/views/sales-record/sales-record-list"),
+        component: () => import("@/views/current-orders/current-orders-list"),
         meta: { title: "订单列表", icon: "nested", auth: true },
       },
-      {
-        path: "sales-record-add",
-        name: "SalesRecordAdd",
-        component: () => import("@/views/sales-record/sales-record-add"),
-        meta: { title: "模拟下单", icon: "el-icon-circle-plus", auth: true },
-      },
+      // {
+      //   path: "current-orders-add",
+      //   name: "SalesRecordAdd",
+      //   component: () => import("@/views/current-orders/current-orders-add"),
+      //   meta: { title: "模拟下单", icon: "el-icon-circle-plus", auth: true },
+      // },
     ],
   },
 
