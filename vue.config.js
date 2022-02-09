@@ -38,7 +38,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:5008',
+        target: 'http://101.201.122.119:5008'
       }
     }
     // before: require('./mock/mock-server.js')
