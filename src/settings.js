@@ -1,5 +1,5 @@
 module.exports = {
-  title: "北极人后台管理系统",
+  title: "服装后台管理系统",
 
   /**
    * @type {boolean} true | false
