@@ -5,7 +5,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: "Admin",
-    avatar: "https://www.huiyadan.com/images/banner/20.jpg",
+    avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
     user: null,
   };
 };

@@ -96,6 +96,11 @@ export default {
         }
       }
       this.isChangePwdLoading = true;
+      if(this.form.newLoginPwd !== this.form.confirmNewLoginPwd) {
+          Message.error("两次新密码不同");
+          this.isChangePwdLoading = false;
+          return;
+      }
       const resp = await changePassword({
         username: this.$store.getters.name,
         oldPassword: this.form.oldLoginPwd,
