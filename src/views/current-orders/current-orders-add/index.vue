@@ -90,7 +90,7 @@
 <script>
 import Upload from "@/components/Upload.vue";
 import { findGoodsList } from "@/api/goods";
-import { findCustomerList } from "@/api/customer";
+import { findCustomerList } from "@/api/finishOrder";
 import { addCurrentOrder } from "@/api/currentOrder";
 import dayjs from "dayjs";
 

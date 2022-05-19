@@ -88,6 +88,7 @@ export default {
       });
     },
     handleUploadImage(data) {
+      console.log(data);
       this.updateForm.store_img_url = data.url;
     },
     openEditPanel() {

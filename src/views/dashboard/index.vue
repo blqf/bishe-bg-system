@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <div class="mark">店铺当前评分：<span class="mark-content">{{ this.mark }}星</span></div>
+    <div class="mark">
+      店铺当前评分：<span class="mark-content">{{ this.mark }}星</span>
+    </div>
     <div class="echarts-pie" ref="echartsPie"></div>
     <div class="echarts-line" ref="echartsContainer"></div>
   </div>
@@ -8,7 +10,7 @@
 
 <script>
 import { findCommentList } from "@/api/comment";
-import { findCustomerList } from "@/api/customer";
+import { findCustomerList } from "@/api/finishOrder";
 export default {
   name: "Dashboard",
   data() {
@@ -31,15 +33,15 @@ export default {
         );
         const buyCount = list[i].buy_count ?? 0;
         if (age >= 0 && age <= 15) {
-          this.ageSalesNums[0]+=buyCount;
+          this.ageSalesNums[0] += buyCount;
         } else if (age >= 16 && age <= 25) {
-          this.ageSalesNums[1]+=buyCount;
+          this.ageSalesNums[1] += buyCount;
         } else if (age >= 26 && age <= 35) {
-          this.ageSalesNums[2]+=buyCount;
+          this.ageSalesNums[2] += buyCount;
         } else if (age >= 36 && age <= 50) {
-          this.ageSalesNums[3]+=buyCount;
+          this.ageSalesNums[3] += buyCount;
         } else {
-          this.ageSalesNums[4]+=buyCount;
+          this.ageSalesNums[4] += buyCount;
         }
         // 按性别分类的销量
         this.sexSalesNums[+list[i].user_sex] += buyCount;

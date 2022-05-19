@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { changePassword } from "@/api/user";
+import { changePassword } from "@/api/admin";
 import { Message } from "element-ui";
 export default {
   data() {

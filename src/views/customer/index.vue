@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { findCustomerList, deleteCustomerById } from "@/api/customer";
+import { findCustomerList, deleteCustomerById } from "@/api/finishOrder";
 
 export default {
   data() {

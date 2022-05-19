@@ -1,4 +1,4 @@
-import { login, whoami } from "@/api/user";
+import { login, whoami } from "@/api/admin";
 import { getToken, removeToken } from "@/utils/auth";
 
 const getDefaultState = () => {
@@ -31,7 +31,6 @@ const mutations = {
 };
 
 const actions = {
-  // user login
   login({ commit }, userInfo) {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
