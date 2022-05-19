@@ -3,8 +3,28 @@
     <div class="mark">
       店铺当前评分：<span class="mark-content">{{ this.mark }}星</span>
     </div>
-    <div class="echarts-pie" ref="echartsPie"></div>
-    <div class="echarts-line" ref="echartsContainer"></div>
+    <div class="echarts-wrapper">
+       <div class="echarts-age-wrapper">
+        <el-select
+          v-model="ageChartsType"
+          placeholder="请选择"
+          @change="handleAgeTypeChange"
+        >
+          <el-option
+            v-for="(item, index) in ageChartsTypes"
+            :key="index"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <div class="echarts-age" ref="echartsAge"></div>
+      </div>
+      <div class="echarts-sex-wrapper">
+        <div class="echarts-sex" ref="echartsSex"></div>
+      </div>
+     
+    </div>
   </div>
 </template>
 
@@ -18,6 +38,28 @@ export default {
       ageSalesNums: [0, 0, 0, 0, 0],
       sexSalesNums: [0, 0],
       mark: 0,
+      ageChartsTypes: [
+        {
+          label: "折线图",
+          value: "line",
+        },
+        {
+          label: "柱状图",
+          value: "bar",
+        },
+      ],
+      ageChartsType: "line",
+      sexChartsTypes: [
+        {
+          label: "饼图",
+          value: "pie",
+        },
+        {
+          label: "柱状图",
+          value: "bar",
+        },
+      ],
+      sexChartsType: "pie",
     };
   },
   methods: {
@@ -56,70 +98,81 @@ export default {
       }
       this.mark = Math.round((this.mark / len) * 10) / 10;
     },
+    drawSexChart() {
+      const sexLineChart = this.$echarts.init(this.$refs.echartsSex);
+      const sexLineChartOption = {
+        title: {
+          text: "不同性别的销量",
+          left: "center",
+        },
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+        },
+        series: [
+          {
+            name: "性别",
+            type: this.sexChartsType,
+            radius: "50%",
+            data: [
+              { value: this.sexSalesNums[0], name: "女" },
+              { value: this.sexSalesNums[1], name: "男" },
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+              },
+            },
+          },
+        ],
+      };
+      sexLineChart.setOption(sexLineChartOption);
+    },
+    drawAgeChart() {
+      const ageLineChart = this.$echarts.init(this.$refs.echartsAge);
+      const ageLineChartOption = {
+        title: {
+          text: "不同年龄段销量",
+          left: "center",
+        },
+        tooltip: {},
+        xAxis: {
+          name: "年龄/岁",
+          type: "category",
+          data: ["0 - 15", "15 - 25", "26 - 35", "36 - 50", "> 50"],
+        },
+        yAxis: {
+          name: "销量/个",
+          type: "value",
+        },
+        series: [
+          {
+            data: this.ageSalesNums,
+            type: this.ageChartsType,
+          },
+        ],
+      };
+      ageLineChart.setOption(ageLineChartOption);
+    },
+    handleSexTypeChange() {
+      this.drawSexChart();
+    },
+    handleAgeTypeChange() {
+      this.drawAgeChart();
+    },
   },
   created() {
     this.fetchCommentData();
   },
   async mounted() {
     await this.fetchGoodsData();
-    const ageLineChart = this.$echarts.init(this.$refs.echartsContainer);
-    const ageLineChartOption = {
-      title: {
-        text: "不同年龄段销量",
-        left: "center",
-      },
-      tooltip: {},
-      xAxis: {
-        name: "年龄/岁",
-        type: "category",
-        data: ["0 - 15", "15 - 25", "26 - 35", "36 - 50", "> 50"],
-      },
-      yAxis: {
-        name: "销量/个",
-        type: "value",
-      },
-      series: [
-        {
-          data: this.ageSalesNums,
-          type: "line",
-        },
-      ],
-    };
-    ageLineChart.setOption(ageLineChartOption);
-
-    const sexLineChart = this.$echarts.init(this.$refs.echartsPie);
-    const sexLineChartOption = {
-      title: {
-        text: "不同性别的销量",
-        left: "center",
-      },
-      tooltip: {
-        trigger: "item",
-      },
-      legend: {
-        orient: "vertical",
-        left: "left",
-      },
-      series: [
-        {
-          name: "性别",
-          type: "pie",
-          radius: "50%",
-          data: [
-            { value: this.sexSalesNums[0], name: "女" },
-            { value: this.sexSalesNums[1], name: "男" },
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)",
-            },
-          },
-        },
-      ],
-    };
-    sexLineChart.setOption(sexLineChartOption);
+    this.drawSexChart();
+    this.drawAgeChart();
   },
 };
 </script>
@@ -134,14 +187,25 @@ export default {
       color: #0af;
     }
   }
-  .echarts-pie {
-    width: 300px;
-    height: 300px;
-    margin-left: 10px;
-  }
-  .echarts-line {
-    width: 600px;
-    height: 300px;
+  .echarts-wrapper {
+    display: flex;
+    justify-content: space-around;
+    .echarts-sex {
+      width: 300px;
+      height: 300px;
+      box-shadow: 0 0 5px #666;
+      border-radius: 4px;
+      margin-top: 57px;
+    }
+    .echarts-age-wrapper {
+      .echarts-age {
+        width: 600px;
+        height: 300px;
+        box-shadow: 0 0 5px #666;
+        border-radius: 4px;
+        margin-top: 18px;
+      }
+    }
   }
 }
 </style>

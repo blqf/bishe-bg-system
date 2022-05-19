@@ -32,7 +32,7 @@ export function updateCustomer(id, newCustomerInfo) {
 
 export function deleteCustomerById(id) {
   return request({
-    url: `/api/user_info/${id}`,
+    url: `/api/sales_record/${id}`,
     method: "delete",
   });
 }

@@ -13,7 +13,7 @@
         }}</template>
       </el-table-column>
 
-      <el-table-column prop="title" label="顾客姓名"  align="center">
+      <el-table-column prop="title" label="顾客姓名" align="center">
         <template slot-scope="scope">
           {{ scope.row.user_name }}
         </template>
@@ -27,7 +27,7 @@
 
       <el-table-column prop="title" label="年龄" width="150" align="center">
         <template slot-scope="scope">{{
-          dayjs().diff(dayjs(scope.row.user_birthday), 'y') + '岁'
+          dayjs().diff(dayjs(scope.row.user_birthday), "y") + "岁"
         }}</template>
       </el-table-column>
 
@@ -118,15 +118,30 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      }).then(() => {
-        deleteCustomerById(customerInfo.id).then((resp) => {
-          this.fetchData();
+      })
+        .then(() => {
+          deleteCustomerById(customerInfo.id).then((resp) => {
+            console.log(resp);
+            if (resp.code === 0) {
+              this.fetchData();
+              this.$message({
+                type: "success",
+                message: "删除成功",
+              });
+            } else {
+              this.$message({
+                type: "error",
+                message: "删除失败，请重试",
+              });
+            }
+          });
+        })
+        .catch(() => {
           this.$message({
-            type: "success",
-            message: "删除成功!",
+            type: "error",
+            message: "删除失败，请重试",
           });
         });
-      });
     },
 
     // 分页相关事件
