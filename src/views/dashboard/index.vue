@@ -4,7 +4,10 @@
       店铺当前评分：<span class="mark-content">{{ this.mark }}星</span>
     </div>
     <div class="echarts-wrapper">
-       <div class="echarts-age-wrapper">
+      <div class="echarts-sex-wrapper">
+        <div class="echarts-sex" ref="echartsSex"></div>
+      </div>
+      <div class="echarts-age-wrapper">
         <el-select
           v-model="ageChartsType"
           placeholder="请选择"
@@ -20,10 +23,6 @@
         </el-select>
         <div class="echarts-age" ref="echartsAge"></div>
       </div>
-      <div class="echarts-sex-wrapper">
-        <div class="echarts-sex" ref="echartsSex"></div>
-      </div>
-     
     </div>
   </div>
 </template>
