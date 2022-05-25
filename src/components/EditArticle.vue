@@ -23,6 +23,7 @@
     <!-- 服装头图 -->
     <Upload
       uploadTitle="图片"
+      type="clothes"
       v-model="form.imgUrl"
       @input="handleUploadImage"
     />

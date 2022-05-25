@@ -5,7 +5,7 @@
     <!-- 上传控件 -->
     <el-upload
       class="avatar-uploader"
-      action="/api/upload"
+      :action="'/api/upload/' + type"
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :headers="headers"
@@ -22,11 +22,10 @@
 import { getToken } from "@/utils/auth";
 import { server_URL } from "@/url-config";
 export default {
-  props: ["uploadTitle", "value", 'containerStyle'],
+  props: ["uploadTitle", "value", "containerStyle", 'type'],
   computed: {
     imageUrl() {
       if (this.value) {
-        console.log(this.value);
         if (this.value.includes("http://") || this.value.includes("https://")) {
           return this.value;
         } else {
@@ -43,6 +42,7 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res) {
+      console.log(res, "res");
       if (!res.code && res.data) {
         // 说明上传成功，服务器给我们返回了图片上传后的服务器地址
         this.$emit("input", res.data);

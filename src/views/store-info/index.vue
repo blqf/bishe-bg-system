@@ -34,6 +34,7 @@
             uploadTitle=""
             v-model="updateForm.store_img_url"
             @input="handleUploadImage"
+            type="storeImage"
             :containerStyle="{ marginTop: '40px' }"
           />
         </el-form-item>
@@ -78,7 +79,6 @@ export default {
     fetchData() {
       findStoreInfo().then(({ data }) => {
         const info = data.rows[0];
-        console.log(info.store_img_url);
         this.form.storeName = info.store_name;
         this.form.storeDescription = info.store_description;
         this.form.storeImgUrl = info.store_img_url;
@@ -88,7 +88,7 @@ export default {
       });
     },
     handleUploadImage(data) {
-      console.log(data);
+      console.log(data, "1234");
       this.updateForm.store_img_url = data.url;
     },
     openEditPanel() {
@@ -96,7 +96,6 @@ export default {
     },
     confirmEditSetting() {
       updateStoreInfo(this.updateForm).then((res) => {
-        console.log(res);
         this.dialogFormVisible = false;
         if (res.code === 0) {
           this.fetchData();
